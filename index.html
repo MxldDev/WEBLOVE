@@ -23,7 +23,7 @@
         body {
             font-family: 'Prompt', sans-serif;
             position: relative;
-            color: white;
+            color: #333;
         }
 
         /* --- Background Video --- */
@@ -44,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.2);
             z-index: -1;
             pointer-events: none;
         }
@@ -66,7 +66,7 @@
             visibility: hidden;
         }
 
-        /* --- Pages Layout --- */
+        /* --- Pages Layout (จัดกึ่งกลางให้ดีขึ้น) --- */
         .page {
             position: fixed;
             width: 100%;
@@ -76,10 +76,23 @@
             display: none;
             flex-direction: column;
             align-items: center;
+            /* ใช้ flex-start แล้วดันด้วย padding แทนเพื่อความชัวร์ */
+            justify-content: flex-start;
             z-index: 10;
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
+            padding: 60px 20px;
+            /* เพิ่ม Padding บนล่างเยอะๆ */
+            box-sizing: border-box;
+        }
+
+        /* ถ้าหน้าจอสูงพอ ให้จัดกลาง */
+        @media (min-height: 800px) {
+            .page {
+                justify-content: center;
+                padding-top: 0;
+            }
         }
 
         .page.active {
@@ -90,6 +103,8 @@
         #page1 {
             justify-content: center;
         }
+
+        /* หน้าแรกบังคับกลางเสมอ */
 
         .gift-button {
             background: rgba(255, 255, 255, 0.9);
@@ -133,24 +148,12 @@
         }
 
         /* --- Page 3: Main Game --- */
-        #page3 {
-            justify-content: center;
-            padding: 20px 10px;
-        }
-
-        @media (max-height: 700px) {
-            #page3 {
-                justify-content: flex-start;
-                padding-top: 40px;
-            }
-        }
-
         .fixed-header {
             width: 100%;
             max-width: 350px;
             text-align: center;
             z-index: 20;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-shrink: 0;
         }
 
@@ -161,7 +164,6 @@
             transform: translateY(30px);
             opacity: 0;
             transition: all 0.8s ease-out;
-            /* เลื่อนขึ้นแบบนุ่มนวล */
             margin-bottom: 40px;
         }
 
@@ -170,16 +172,17 @@
             opacity: 1;
         }
 
-        /* --- Glass Card & Text --- */
+        /* --- Glass Card Style (White Theme) --- */
         .glass-card {
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 20px;
             padding: 20px;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin-bottom: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            color: #333;
         }
 
         .main-title {
@@ -188,7 +191,7 @@
             font-weight: 700;
             color: #FFF;
             text-shadow: 0 0 10px #FF1493, 0 0 30px #FF1493;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
         }
 
@@ -211,7 +214,7 @@
 
         .time-label {
             font-size: 0.9rem;
-            color: #EEE;
+            color: #666;
             margin-bottom: 5px;
         }
 
@@ -219,14 +222,13 @@
             font-family: 'Kanit', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #FF69B4;
-            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            color: #FF1493;
             margin-bottom: 5px;
         }
 
         .time-detail {
             font-size: 0.85rem;
-            color: #FFB3D9;
+            color: #555;
             font-weight: 600;
         }
 
@@ -244,7 +246,7 @@
             cursor: pointer;
             user-select: none;
             transition: transform 0.1s;
-            filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
             margin-bottom: 15px;
             -webkit-tap-highlight-color: transparent;
         }
@@ -282,7 +284,7 @@
         .progress-wrapper {
             width: 90%;
             height: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 50px;
             overflow: hidden;
             border: 2px solid #FF69B4;
@@ -310,7 +312,7 @@
         .tap-count {
             margin-top: 8px;
             font-size: 1.2rem;
-            color: #FFF;
+            color: #333;
             font-weight: bold;
         }
 
@@ -318,45 +320,44 @@
             text-align: center;
             font-size: 1rem;
             line-height: 1.5;
-            color: #FFF;
+            color: #555;
         }
 
-        /* --- Page 4: Final Message --- */
-        #page4 {
-            justify-content: flex-start;
-            padding: 40px 20px;
-        }
-
+        /* --- Page 4: Final Message (แก้ไข) --- */
         .scroll-title {
             font-family: 'Kanit', sans-serif;
             font-size: 2rem;
             font-weight: 700;
-            color: #FF69B4;
+            color: #FF1493;
             text-align: center;
             margin-bottom: 20px;
-            text-shadow: 0 0 20px #FF1493;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            width: 100%;
+            margin-top: 20px;
+            /* เพิ่มระยะห่างด้านบน */
         }
 
         .scroll-content {
             width: 100%;
             max-width: 500px;
-            color: #FFF;
+            color: #333;
             font-size: 1.1rem;
             line-height: 1.6;
             text-align: center;
             margin: 0 auto 30px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .polaroid {
             background: #FFF;
             padding: 10px 10px 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transform: rotate(-3deg);
             max-width: 250px;
-            margin: 20px auto;
+            margin: 0 auto 20px;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -382,7 +383,7 @@
             cursor: pointer;
             margin: 20px auto 40px;
             display: block;
-            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.5);
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
         }
 
         /* --- Popups --- */
@@ -393,7 +394,6 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            /* พื้นหลังดำจางๆ */
             backdrop-filter: blur(5px);
             display: none;
             align-items: center;
@@ -405,17 +405,15 @@
             display: flex;
         }
 
-        /* CSS สำหรับป๊อปอัป "คิดถึง" แบบใหม่ */
         .miss-you-card {
             background: #fff;
             border: 3px solid #FFB6C1;
-            /* ขอบชมพู */
             border-radius: 20px;
             padding: 40px 20px;
             text-align: center;
             width: 85%;
             max-width: 320px;
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             animation: popupBounce 0.4s ease;
             position: relative;
         }
@@ -424,7 +422,6 @@
             font-family: 'Kanit', sans-serif;
             font-size: 1.6rem;
             color: #FF1493;
-            /* สีชมพูเข้ม */
             font-weight: 600;
             margin-bottom: 10px;
         }
@@ -434,11 +431,10 @@
             color: #999;
         }
 
-        /* Success Popup */
         .popup-content-success {
             background: #FFFFFF;
             padding: 30px 60px;
-            box-shadow: 0 0 60px rgba(255, 105, 180, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             border-radius: 50px;
             text-align: center;
             width: 90%;
@@ -475,7 +471,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.6);
             z-index: 100;
         }
 
@@ -496,7 +492,7 @@
 
             .glass-card {
                 padding: 15px;
-                margin-bottom: 8px;
+                margin-bottom: 15px;
             }
 
             .time-display {
@@ -558,8 +554,7 @@
 
         <div class="puzzle-section" id="puzzleSection">
             <div class="glass-card">
-                <p
-                    style="text-align: center; color: #FFB3D9; margin-bottom: 5px; font-size: 1rem; text-shadow: 0 1px 2px #000;">
+                <p style="text-align: center; color: #FF69B4; margin-bottom: 5px; font-size: 1rem; font-weight: 600;">
                     จิ้มรัวๆ ให้กล่องแตก!
                 </p>
 
@@ -576,7 +571,7 @@
 
             <div class="glass-card" style="padding: 15px;">
                 <p class="message-text">
-                    ข้างในมีอะไรซ่อนอยู่กันนะ... <span class="dino">😸</span>
+                    ข้างในมีอะไรซ่อนอยู่กันนะ... <span class="dino">🦕</span>
                 </p>
             </div>
         </div>
@@ -585,15 +580,22 @@
     <div class="page" id="page4">
         <h2 class="scroll-title">Happy New Year 🎆💙</h2>
         <div class="scroll-content">
-            <p>ดีใจที่ได้เจอกันนะ ขอบคุณช่วงเวลาดีๆที่ผ่านมา</p>
-            <p>ขอให้ปีใหม่นี้เป็นอีกปีที่เราได้อยู่ด้วยกัน</p>
-            <p>มีรอยยิ้มให้กันเยอะๆ รักกันนานๆเลยย</p>
-            <p style="color: #FF69B4; font-weight: 600; margin-top: 20px;">รักนะ (พูด)</p>
+            <p>จ๊ะเอ๋ ปีใหม่แล้วน้าา 🎉</p>
+            <p>จับมือกันข้ามปีด้วยกันนะค้าบบ 👫</p>
+            <p>ปีนี้ก็ขอให้หนูติดมหาลัยย 🎓✨</p>
+            <p>และก็อยู่ด้วยกันไปนานๆ เลยนะ ไม่ทิ้งกันไปไหน</p>
+            <p>ตัวอยู่ไกลแต่ความรักที่มีให้หนูอยู่ใกล้ๆ ตลอด 💖</p>
+            <p>ปีนี้ขอหนูมีแต่สิ่งดีเข้ามาเยอะๆ มีความสุขกับปีนี้ให้มาก</p>
+            <p>รักหนูมากๆ ทั้งห่วง ทั้งหวง ทั้งหึงอยู่ตลอด 🥺</p>
+            <p>ความรู้สึกผมไม่เคยเปลี่ยนไปน้าา</p>
+            <p style="color: #FF69B4; font-weight: 600; margin-top: 20px;">มีแค่แพรแบบนี้ไปนานๆ 💕</p>
         </div>
+
         <div class="polaroid" onclick="changePhoto()">
             <img id="polaroidImage" src="https://img2.pic.in.th/30485B74-5B0D-439D-92A6-B42CE511F0C2.jpg" alt="Photo">
         </div>
-        <p style="text-align: center; color: #CCC; margin-bottom: 20px; font-size: 0.9rem;">แตะที่รูปเพื่อดูรูปอื่นๆ 📸
+
+        <p style="text-align: center; color: #EEE; margin-bottom: 20px; font-size: 0.9rem;">แตะที่รูปเพื่อดูรูปอื่นๆ 📸
         </p>
         <button class="continue-btn" onclick="showMissYouPopup()">❤️ กดเมื่อคิดถึง</button>
     </div>
@@ -607,11 +609,11 @@
 
     <div class="popup-overlay" id="puzzleSuccessPopup">
         <div class="popup-content-success">
-            <h3 class="success-title">เก่งมั๊กกค้าบบ</h3>
+            <h3 class="success-title">เย้! สำเร็จ 🎊</h3>
         </div>
     </div>
 
-    <div class="watermark">สำหรับแพร</div>
+    <div class="watermark">MOMENTÉ</div>
 
     <script>
         const relationshipStart = new Date(2023, 4, 1);
@@ -734,7 +736,6 @@
                     updateTimer();
                     setInterval(updateTimer, 1000);
                     initGame();
-                    // แก้ไขตรงนี้จาก 500 เป็น 5000 (5 วินาที)
                     setTimeout(() => { document.getElementById('puzzleSection').classList.add('visible'); }, 5000);
                 }, 2000);
             }, 5000);
